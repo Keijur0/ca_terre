@@ -9,7 +9,7 @@
 
 // Possibility 2:
 
-path = module.filename          // returns home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
+path = module.filename          // home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
 splitpath = path.split("/");
 name = splitpath[6];
 
@@ -18,5 +18,7 @@ console.log(name);
 
 // Possibility 3:
 //
-// name = process.argv[1];
+// path = process.argv[1]; 		// home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
+// splitpath = path.split("/");
+// name = splitpath[6];
 // console.log(name);
