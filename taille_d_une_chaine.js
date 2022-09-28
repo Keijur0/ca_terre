@@ -1,3 +1,5 @@
+// This script takes a string as argument and returns its size
+
 chaine = process.argv[2];
 nbArg = process.argv.length;
 errorMessage = "erreur.";

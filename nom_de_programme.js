@@ -1,6 +1,6 @@
 // This script displays his own name
 
-// Possibility 1: (but seems "too easy")
+// Possibility 1: 
 //
 // path = require("path");
 // name = path.basename(__filename);

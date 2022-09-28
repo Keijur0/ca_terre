@@ -1,3 +1,5 @@
+// This script takes a string as argument and returns it backwards
+
 chaine = process.argv[2];
 chaineInverse = "";
 errorMessage = "Erreur.";
