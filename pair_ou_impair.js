@@ -1,7 +1,7 @@
-/* const acceptable = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]; */
+// This script returns if a number is whether even or odd
+
 number = process.argv[2];
-isValid = false;
-errorMessage = "Tu ne me la mettras pas à l'envers."
+errorMessage = "Tu ne me la mettras pas à l'envers.";
 
 // Too many args?
 if (process.argv.length > 3)
@@ -21,7 +21,7 @@ if (number[0] == String.fromCharCode(45))
     number = -(number);
 }
 
-// Checking the rest of characters
+// All the characters valid ?
 for (i = 0; i < number.length; i++)
 {
     if(number[i].charCodeAt() < 47 || number[i].charCodeAt() > 58)
