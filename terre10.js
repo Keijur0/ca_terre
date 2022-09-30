@@ -1,8 +1,9 @@
-// This scripts takes a number as arugment and returns its square root
+// This script passes an argument in and returns if it is a prime number or not
 
 nbArg = process.argv.length;
 number = process.argv[2];
 errorMessage = "erreur.";
+factorList = [];
 
 function validityCheck(number)
 {
@@ -10,38 +11,38 @@ function validityCheck(number)
     {
         return false;
     }
-    else if (number < 0)
-    {
-        return false;
-    }
-    for (i = 0; i < number.length; i++ )
+    for (let i = 0; i < number.length; i++)
     {
         if (number.charCodeAt(i) < 48 || number.charCodeAt(i) > 57)
         {
-            console.log(errorMessage);
             return false;
         }
     }
 }
-
-function sqrt(number)
+function isPrimeNumber(number)
 {
-    temp = (number/2);
-    do
+    for (let i = 1; i <= +number; i++)
     {
-        result = temp;
-        temp = (result + (number / result)) / 2;
+        if (Number.isInteger(+(number)/i))
+        {
+            factorList.push(i);
+        }
     }
-    while (result !== temp);
-
-    return result;
+    if (factorList.length == 2)
+    {
+        return "Oui, " + number + " est un nombre premier.";
+    }
+    else
+    {
+        return "Non, " + number + " n'est pas un nombre premier";
+    }
 }
 
 if (validityCheck(number) == false)
 {
-    console.log(errorMessage)
+    console.log(errorMessage);
 }
 else
 {
-    console.log(sqrt(number));
+    console.log(isPrimeNumber(number));
 }

@@ -1,48 +1,87 @@
-// This script takes a time in 24-h format and converts it to a 12-h time format
-
-nbArg = process.argv.length;
 time = process.argv[2];
-errorMessageFormat = "Erreur. Le format correct est: HH:MM ou H:MM. Où H est un entier entre 0 et 23, et M est un entier entre 0 et 59.";
+tempSuffix = process.argv[3];
+errorMessageFormat = "Erreur. Le format correct est: HH:MM ou H:MM suivi de AM ou PM. MM doit être entre 0 et 59. Si AM: HH doit être entre 0 et 11, si PM: HH doit être entre 1 et 12.";
+nbArg = process.argv.length;
 var hour;
 var minute;
-var timeSuffix;
 
 function validityCheck(time)
 {
-    if (nbArg !== 3)
+    // Accepting if there is a space between the time and AM/PM
+    if (nbArg < 3 || nbArg > 4)
+    {
+        return false;
+    }
+    // Merging the 2nd argument with the 1st one and formatting its result
+    if (nbArg == 4)
+    {
+        time = time + tempSuffix;
+        time = time.toUpperCase();
+        time = time.replace(/\s+/g, "");
+    }
+    else
+    {
+        time = time.toUpperCase();
+        time = time.replace(/\s+/g, "");
+    }
+    // Does the argument look like a 12-hour time format?
+    if (time.length < 6 || time.length > 7 || !time.endsWith("AM") && !time.endsWith("PM"))
     {
         return false;
     }
 
-    if (time.length < 4 || time.length > 5)
+    // X:YYZZ format
+    else if (time.length == 6)
     {
-        return false;
+        if (time[1] !== ":")
+        {
+            return false;
+        }
+        else
+        {
+            hour = time[0];
+            minute = time[2] + time[3];
+            tempSuffix = time[4] + time[5];
+        }
+        if(hour.charCodeAt() < 48 || hour.charCodeAt() > 57)
+            {
+                return false;
+            }
+        else
+        {
+            for(let i = 0; i < minute.length; i++)
+            {
+                if(minute[i].charCodeAt() < 48 || minute[i].charCodeAt() > 57)
+                {
+                    return false;
+                }
+            }
+        }
     }
-    else if (time[1] !== ":" && time[2] !== ":")
-    {    
-        return false;
-    }
+    // XX:YYZZ format
     else
     {
-        splitTime = time.split(":");
-        hour = splitTime[0];
-        minute = splitTime[1];
-    }
-    for(let i = 0; i < hour.length; i++)
-    {
-        if (hour.charCodeAt(i) < 48 || hour.charCodeAt(i) > 57)
+        if (time[2] !== ":")
         {
             return false;
         }
-    }
-    for(let i = 0; i < minute.length; i++)
-    {
-        if(minute.charCodeAt(i) < 48 || minute.charCodeAt(i) > 57)
+        else
         {
-            return false;
+            hour = time[0] + time[1];
+            minute = time[3] + time[4];
+            tempSuffix = time[5] + time[6];
+        
+            for (let i = 0; i < hour.length; i++)
+            {
+                if(hour[i].charCodeAt() < 48 || hour[i].charCodeAt() > 58 || minute[i].charCodeAt() < 48 || hour[i].charCodeAt() > 57)
+                {
+                    return false;
+                }
+            }
         }
     }
-    if (+hour < 0 || +hour > 23)
+    // Is the time in 12-hour format actually valid? (handling exceptions)
+    if ((+hour < 0 || +hour > 12) || (+hour == 0 && tempSuffix == "PM") || (+hour == 12 && tempSuffix == "AM"))
     {
         return false;
     }
@@ -50,24 +89,16 @@ function validityCheck(time)
     {
         return false;
     }
-
 }
+
 function timeConverter(time)
 {
-    if (+hour < 12)
+    if (tempSuffix == "PM" && +hour !== 12)
     {
-        timeSuffix = "AM";
+        hour = +hour + 12;
     }
-    else if (+hour > 12)
-    {
-        timeSuffix = "PM";
-        hour = hour - 12;
-    }
-    else if (+hour == 12)
-    {
-        timeSuffix = "PM";
-    }
-    return hour + ":" +minute+timeSuffix;
+    finalTime = hour + ":" + minute;
+    return finalTime;
 }
 
 if (validityCheck(time) == false)

@@ -1,24 +1,7 @@
-// This script displays his own name
+// This script displays every arguments vertically
 
-// Possibility 1: 
-//
-// path = require("path");
-// name = path.basename(__filename);
-// console.log(name);
-
-
-// Possibility 2:
-
-path = module.filename          // home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
-splitpath = path.split("/");
-filename = splitpath[6];
-
-console.log(filename);
-
-
-// Possibility 3:
-//
-// path = process.argv[1]; 		// home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
-// splitpath = path.split("/");
-// name = splitpath[6];
-// console.log(name);
+args = process.argv;
+for (i = 2; i < args.length; i++)
+{
+	console.log(args[i]);
+}

@@ -1,48 +1,80 @@
-// This script passes an argument in and returns if it is a prime number or not
+// This script takes a time in 24-h format and converts it to a 12-h time format
 
 nbArg = process.argv.length;
-number = process.argv[2];
-errorMessage = "erreur.";
-factorList = [];
+time = process.argv[2];
+errorMessageFormat = "Erreur. Le format correct est: HH:MM ou H:MM. Où H est un entier entre 0 et 23, et M est un entier entre 0 et 59.";
+var hour;
+var minute;
+var timeSuffix;
 
-function validityCheck(number)
+function validityCheck(time)
 {
     if (nbArg !== 3)
     {
         return false;
     }
-    for (let i = 0; i < number.length; i++)
+
+    if (time.length < 4 || time.length > 5)
     {
-        if (number.charCodeAt(i) < 48 || number.charCodeAt(i) > 57)
+        return false;
+    }
+    else if (time[1] !== ":" && time[2] !== ":")
+    {    
+        return false;
+    }
+    else
+    {
+        splitTime = time.split(":");
+        hour = splitTime[0];
+        minute = splitTime[1];
+    }
+    for(let i = 0; i < hour.length; i++)
+    {
+        if (hour.charCodeAt(i) < 48 || hour.charCodeAt(i) > 57)
         {
             return false;
         }
     }
-}
-function isPrimeNumber(number)
-{
-    for (let i = 1; i <= +number; i++)
+    for(let i = 0; i < minute.length; i++)
     {
-        if (Number.isInteger(+(number)/i))
+        if(minute.charCodeAt(i) < 48 || minute.charCodeAt(i) > 57)
         {
-            factorList.push(i);
+            return false;
         }
     }
-    if (factorList.length == 2)
+    if (+hour < 0 || +hour > 23)
     {
-        return "Oui, " + number + " est un nombre premier.";
+        return false;
     }
-    else
+    else if (+minute < 0 || +minute > 59)
     {
-        return "Non, " + number + " n'est pas un nombre premier";
+        return false;
     }
+
+}
+function timeConverter(time)
+{
+    if (+hour < 12)
+    {
+        timeSuffix = "AM";
+    }
+    else if (+hour > 12)
+    {
+        timeSuffix = "PM";
+        hour = hour - 12;
+    }
+    else if (+hour == 12)
+    {
+        timeSuffix = "PM";
+    }
+    return hour + ":" +minute+timeSuffix;
 }
 
-if (validityCheck(number) == false)
+if (validityCheck(time) == false)
 {
-    console.log(errorMessage);
+    console.log(errorMessageFormat);
 }
 else
 {
-    console.log(isPrimeNumber(number));
+    console.log(timeConverter(time));
 }

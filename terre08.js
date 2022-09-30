@@ -1,32 +1,41 @@
-// This script takes a string as argument and returns its size
+// This script takes 2 numbers as argument and shows the result of the 1st number exponent the 2nd one
 
-chaine = process.argv[2];
 nbArg = process.argv.length;
+firstNumber = process.argv[2];
+secondNumber = process.argv[3];
 errorMessage = "erreur.";
-tailleChaine = 0;
 
-function validityCheck(chaine)
+function validityCheck(firstNumber, secondNumber)
 {
-    if (nbArg < 3 || nbArg > 3)
+    if (nbArg !== 4)
     {
         return false;
     }
-while (isFinite(chaine.charCodeAt(tailleChaine)))
+    for (let i = 0; i < firstNumber.length; i++)
     {
-        if (chaine.charCodeAt(tailleChaine) > 47 && chaine.charCodeAt(tailleChaine) < 58 )
+        if(firstNumber.charCodeAt(i) < 48 || firstNumber.charCodeAt(i) > 57)
         {
             return false;
         }
-        tailleChaine++; 
     }
-    return tailleChaine;
+    for (let i = 0; i < secondNumber.length; i++)
+    {
+        if (secondNumber.charCodeAt(i) < 48 || secondNumber.charCodeAt(i) > 57)
+        {
+            return false;
+        }
+    }
 }
+function square (firstNumber, secondNumber)
+ {
+    return firstNumber ** secondNumber;
+ }
 
-if (validityCheck(chaine) == false)
-{
+ if (validityCheck(firstNumber, secondNumber) == false)
+ {
     console.log(errorMessage);
-}
-else
-{
-    console.log(validityCheck(chaine));
-}
+ }
+ else
+ {
+    console.log(square(firstNumber,secondNumber));
+ }

@@ -1,30 +1,25 @@
-// This script takes a string as argument and returns it backwards
+// This script takes a string as argument and returns its size
 
-nbArg = process.argv.length;
 chaine = process.argv[2];
-chaineInverse = "";
-lastCharIndex = "";
-errorMessage = "Erreur.";
+nbArg = process.argv.length;
+errorMessage = "erreur.";
+tailleChaine = 0;
 
 function validityCheck(chaine)
 {
-    if(nbArg !== 3)
+    if (nbArg < 3 || nbArg > 3)
     {
         return false;
     }
-    else
+while (isFinite(chaine.charCodeAt(tailleChaine)))
     {
-        lastCharIndex = chaine.length - 1;
-        return lastCharIndex;
+        if (chaine.charCodeAt(tailleChaine) > 47 && chaine.charCodeAt(tailleChaine) < 58 )
+        {
+            return false;
+        }
+        tailleChaine++; 
     }
-}
-function invertString(chaine)
-{
-    for (i = 0; i <= lastCharIndex; i++)
-    {
-        chaineInverse = chaineInverse + chaine[lastCharIndex-i];
-    } 
-    return chaineInverse;
+    return tailleChaine;
 }
 
 if (validityCheck(chaine) == false)
@@ -33,11 +28,5 @@ if (validityCheck(chaine) == false)
 }
 else
 {
-    console.log(invertString(chaine));
+    console.log(validityCheck(chaine));
 }
-
-
-
-
-
-

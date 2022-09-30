@@ -1,49 +1,49 @@
-// This script will display the rest of the alphabet, starting from the letter passed in argument
+// This script returns if a number is whether even or odd
 
-args = process.argv;
-firstArg = args[2].toLowerCase();
-countArgs = args.length;
-countArgsLetters = firstArg.length;
-result = firstArg;
-errorMessage = "Please try again using only 1 alphabet letter as an argument.";
+number = process.argv[2];
+argList = process.argv;
+nbArg = argList.length;
+errorMessage = "Tu ne me la mettras pas à l'envers.";
 
-function validityCheck(args)
-{
-	// Counting arguments
-	if(countArgs > 3)
-	{
-		return false;
-	}
-	// Checking if the argument is only 1 character
-	else if(countArgsLetters>=2)
-	{
-		return false;
-	}
-	// Checking if the argument is a letter
-	if (firstArg.charCodeAt() < 97 || firstArg.charCodeAt() > 122)
-	{
-		return false;
-	}
+function validityCheck(argList)
+{ 
+// Too many args?
+    if (nbArg !== 3)
+    {
+        return false;
+    }
+    // Negative number?
+    if (number < 0)
+    {
+        number = -(number);
+    }
+    // All the characters valid ?
+    for (i = 0; i < number.length; i++)
+    {
+        if(number[i].charCodeAt() < 47 || number[i].charCodeAt() > 58)
+        {
+            return false;
+        }
+    }
 }
 
-function restOfAlphabet(firstArg)
+function evenOrOdd(number)
 {
-	for(i=firstArg.charCodeAt()+1; i <= 122; i++)
-	{
-		result = result + String.fromCharCode(i);
-	}
-	return result;
+    if(number % 2 == 0)
+    {
+        return "pair";
+    }
+    else
+    {
+        return "impair";
+    }
 }
 
-
-
-if (validityCheck(args) == false)
+if (validityCheck(argList) == false)
 {
-	console.log(errorMessage);
+    console.log(errorMessage);
 }
 else
 {
-	console.log(restOfAlphabet(firstArg));
+    console.log(evenOrOdd(number));
 }
-
-
