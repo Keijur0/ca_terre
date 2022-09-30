@@ -11,9 +11,9 @@
 
 path = module.filename          // home/keij/coding-accelerator/semaine2/terre/nom_de_programme.js
 splitpath = path.split("/");
-name = splitpath[6];
+filename = splitpath[6];
 
-console.log(name);
+console.log(filename);
 
 
 // Possibility 3:

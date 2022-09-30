@@ -16,13 +16,11 @@ function validityCheck(number)
     {
         if (number.charCodeAt(i) < 48 || number.charCodeAt(i) > 57)
         {
-            console.log(errorMessage+"1");
             return false;
         }
     }
     if (nb1 == nb2 == nb3 || nb1 == nb2 || nb1 == nb3 || nb1 == nb2 || nb2 == nb3)
     {
-        console.log(errorMessage+"2");
         return false;
     }
 }
@@ -45,19 +43,22 @@ function findTheMiddle(nb1, nb2, nb3)
 
 if (+nbArg !== 5)
 {
-    console.log(errorMessage+"3");
+    console.log(errorMessage);
     return;
 }
 else if (validityCheck(nb1) == false)
 {
+    console.log(errorMessage);
     return;
 }
 else if (validityCheck(nb2) == false)
 {
+    console.log(errorMessage);
     return;
 }
 else if (validityCheck(nb3) == false)
 {
+    console.log(errorMessage);
     return;
 }
 else

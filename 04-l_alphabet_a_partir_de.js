@@ -5,34 +5,45 @@ firstArg = args[2].toLowerCase();
 countArgs = args.length;
 countArgsLetters = firstArg.length;
 result = firstArg;
-isALetter = false;
+errorMessage = "Please try again using only 1 alphabet letter as an argument.";
 
-// Checking how many arguments have been sent
-if(countArgs > 3)
+function validityCheck(args)
 {
-	console.log("Please try again, inserting only 1 argument (alphabet letter).")
-}
-// Checking if the argument is only 1 character
-else if(countArgsLetters>=2)
-{
-	console.log("Please try again using only 1 alphabet letter as an argument.")
-}
-// Checking if the argument is a letter
-for(i = 97; i <= 122; i++)
-{
-	if(firstArg == String.fromCharCode(i))
+	// Counting arguments
+	if(countArgs > 3)
 	{
-		isALetter = true;
+		return false;
+	}
+	// Checking if the argument is only 1 character
+	else if(countArgsLetters>=2)
+	{
+		return false;
+	}
+	// Checking if the argument is a letter
+	if (firstArg.charCodeAt() < 97 || firstArg.charCodeAt() > 122)
+	{
+		return false;
 	}
 }
-if(isALetter == false)
-	{
-		console.log("This is not an alphabet letter. Please try again.");
-	}
 
-// Building the result
-for(i=firstArg.charCodeAt()+1; i <= 122; i++)
+function restOfAlphabet(firstArg)
 {
-	result = result + String.fromCharCode(i);
+	for(i=firstArg.charCodeAt()+1; i <= 122; i++)
+	{
+		result = result + String.fromCharCode(i);
+	}
+	return result;
 }
-console.log(result);
+
+
+
+if (validityCheck(args) == false)
+{
+	console.log(errorMessage);
+}
+else
+{
+	console.log(restOfAlphabet(firstArg));
+}
+
+

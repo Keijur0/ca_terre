@@ -1,23 +1,40 @@
 // This script takes a string as argument and returns it backwards
 
+nbArg = process.argv.length;
 chaine = process.argv[2];
 chaineInverse = "";
+lastCharIndex = "";
 errorMessage = "Erreur.";
 
+function validityCheck(chaine)
+{
+    if(nbArg !== 3)
+    {
+        return false;
+    }
+    else
+    {
+        lastCharIndex = chaine.length - 1;
+        return lastCharIndex;
+    }
+}
+function invertString(chaine)
+{
+    for (i = 0; i <= lastCharIndex; i++)
+    {
+        chaineInverse = chaineInverse + chaine[lastCharIndex-i];
+    } 
+    return chaineInverse;
+}
 
-if(process.argv.length < 3 || process.argv.length > 3)
+if (validityCheck(chaine) == false)
 {
     console.log(errorMessage);
-    return;
 }
-lastCharAddr = chaine.length - 1;
-
-for (i = 0; i <= lastCharAddr; i++)
+else
 {
-    chaineInverse = chaineInverse + chaine[lastCharAddr-i];
-} 
-
-console.log(chaineInverse);
+    console.log(invertString(chaine));
+}
 
 
 

@@ -1,31 +1,47 @@
 // This scripts takes a number as arugment and returns its square root
 
+nbArg = process.argv.length;
 number = process.argv[2];
 errorMessage = "erreur.";
-temp = (number/2);
 
-
-if (process.argv.length < 3 || process.argv.length > 3)
+function validityCheck(number)
 {
-    console.log(errorMessage);
-    return;
-}
-
-for (i = 0; i < number.length; i++ )
-{
-    if (number.charCodeAt(i) < 48 || number.charCodeAt(i) > 57)
+    if (nbArg !== 3)
     {
-        console.log(errorMessage);
-        return;
+        return false;
+    }
+    else if (number < 0)
+    {
+        return false;
+    }
+    for (i = 0; i < number.length; i++ )
+    {
+        if (number.charCodeAt(i) < 48 || number.charCodeAt(i) > 57)
+        {
+            console.log(errorMessage);
+            return false;
+        }
     }
 }
 
-do
+function sqrt(number)
 {
-    result = temp;
-    temp = (result + (number / result)) / 2;
-}
-while (result !== temp);
+    temp = (number/2);
+    do
+    {
+        result = temp;
+        temp = (result + (number / result)) / 2;
+    }
+    while (result !== temp);
 
-    
-console.log(result);
+    return result;
+}
+
+if (validityCheck(number) == false)
+{
+    console.log(errorMessage)
+}
+else
+{
+    console.log(sqrt(number));
+}

@@ -4,8 +4,12 @@ const Alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 i = 0;
 var result = "";
 
-for (let i = 0; i < Alphabet.length; i++)
+function sayAlphabet(Alphabet)
 {
-	result = result + Alphabet[i];
+	for (let i = 0; i < Alphabet.length; i++)
+	{
+		result = result + Alphabet[i];
+	}
+	return result;
 }
-console.log(result);
+console.log(sayAlphabet(Alphabet));
