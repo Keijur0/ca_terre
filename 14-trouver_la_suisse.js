@@ -29,7 +29,7 @@ function validityCheck(number)
 
 function findTheMiddle(nb1, nb2, nb3)
 {
-    if ((nb2 > nb1 && nb1 > nb3) || (nb2 < nb1 && nb1 < nb3))
+    if ((nb2 < nb1 && nb1 < nb3) || (nb2 > nb1 && nb1 > nb3))
     {
         return nb1;
     }
