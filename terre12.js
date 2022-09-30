@@ -1,3 +1,5 @@
+// This script takes a time in 12-h format and converts it to a 24-h time format
+
 time = process.argv[2];
 tempSuffix = process.argv[3];
 errorMessageFormat = "Erreur. Le format correct est: HH:MM ou H:MM suivi de AM ou PM. MM doit être entre 0 et 59. Si AM: HH doit être entre 0 et 11, si PM: HH doit être entre 1 et 12.";

@@ -1,3 +1,5 @@
+// This script takes a list of integers as arguments and returns if they are sorted or not
+
 errorMessage = "erreur.";
 argList = process.argv;
 nbArg = process.argv.length;
